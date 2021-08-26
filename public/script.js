@@ -158,42 +158,21 @@ function update(index, link) {
 
 }
 
-function remove(index, _name, link) { //(index,link)
+function remove(index, _name, link) {
 
-    //escuta se o botao foi clicado
 
-    const http = new XMLHttpRequest(); //cria um objeto para requisição ao servidor
+    const http = new XMLHttpRequest();
     const url = link;
 
-    http.open("POST", link, true); //abre uma comunicação com o servidor através de uma requisição POST
-    http.setRequestHeader('Content-Type', 'application/json'); //constroi um cabecalho http para envio dos dados
+    http.open("POST", link, true);
+    http.setRequestHeader('Content-Type', 'application/json');
 
-    //dataToSend = JSON.stringify({id:index}); //transforma o objeto literal em uma string JSON que é a representação em string de um objeto JSON
-    dataToSend = JSON.stringify({ name: _name }); //transforma o objeto literal em uma string JSON que é a representação em string de um objeto JSON
+    dataToSend = JSON.stringify({ name: _name });
 
-    http.send(dataToSend);//envia dados para o servidor na forma de JSON
-
-    /* este codigo abaixo foi colocado para que a interface de cadastro so seja modificada quando se receber um aviso do servidor que a modificacao foi feita com sucesso. No caso o aviso vem na forma do codigo 200 de HTTP: OK */
-
-    /*
-    readyState:
-    0: request not initialized
-    1: server connection established
-    2: request received
-    3: processing request
-    4: request finished and response is ready
-
-    status:
-    200: "OK"
-    403: "Forbidden"
-    404: "Page not found"
-    */
-
-    // baseado nos valores acima apresentados, o codigo abaixo mostra o que foi enviado pelo servidor como resposta ao envio de dados. No caso, se o request foi finalizado e o response foi recebido, a mensagem recebida do servidor eh mostrada no console do navegador. esse codigo foi feito apenas para verificar se tudo ocorreu bem no envio
+    http.send(dataToSend);
 
     http.onload = () => {
 
-        //seleciona todas as tags que sejam td 
         let tr = document.querySelector(`table#list > tbody > tr[data-index-row='${index}']`);
 
         if (http.readyState === 4 && http.status === 200) {
@@ -236,7 +215,7 @@ function validacao(nome, email, endereco, altura, age, vote) {
     }
     if (email == "") {
         emai1.classList.add('dadoinconsistente');
-        validacaoemail.style.display = "bloc"
+        validacaoemail.style.display = "block"
         boolean = false;
     } else {
         emai1.classList.remove('dadoinconsistente');
@@ -244,7 +223,7 @@ function validacao(nome, email, endereco, altura, age, vote) {
     }
     if (endereco == "") {
         endereco1.classList.add('dadoinconsistente');
-        validacaoendereco.style.display = "bloc"
+        validacaoendereco.style.display = "block"
         boolean = false;
     } else {
         endereco1.classList.remove('dadoinconsistente');
@@ -268,11 +247,11 @@ function validacao(nome, email, endereco, altura, age, vote) {
     }
     if (vote == "") {
         vote1.classList.add('dadoinconsistente');
-        vote1.style.display = "block"
+        validacaovore.style.display = "block"
         boolean = false;
     } else {
         vote1.classList.remove('dadoinconsistente');
-        vote1.style.display = "none"
+        validacaovore.style.display = "none"
     }
     return boolean
 }
@@ -308,28 +287,166 @@ function add() {
 }
 
 function list() {
+
+    var listadenames = []
+
+
+    const http = new XMLHttpRequest();
+
+    http.open("GET", '/cadastro/list', true);
+    http.setRequestHeader('Content-Type', 'application/json');
+
+    dataToSend = JSON.stringify({ name: _name });
+
+    http.send(dataToSend);
+
+    http.onload = (e) => {
+        if (http.readyState === 4 && http.status === 200) {
+            var valor = JSON.parse(http.response).users
+            let tbod
+            let tableList = document.querySelector(`table#list > tbody`);
+
+            valor.forEach((element, cont) => {
+                let tr = document.createElement("tr");
+                tr.setAttribute(`data-index-row`, cont)
+
+                var substituicao = element
+                for (var chave in substituicao) {
+                    console.log(element.name)
+
+                    if (chave == "name") {
+                        let td = document.createElement("td");
+                        let span = document.createElement("span");
+                        let input = document.createElement("input");
+                        input.type = "text";
+                        input.name = "name";
+                        input.className = "hidden"
+                        input.value = element.name
+                        td.setAttribute(`data-index-row`, cont);
+                        span.className = "show";
+                        span.innerHTML = element.name
+                        td.appendChild(span);
+                        td.appendChild(input);
+                        tr.appendChild(td);
+                    }
+
+                    if (chave == "email") {
+                        let td = document.createElement("td");
+                        let span = document.createElement("span");
+                        let input = document.createElement("input");
+                        input.type = "text";
+                        input.name = "email";
+                        input.className = "hidden"
+                        input.value = element.email
+                        td.setAttribute(`data-index-row`, cont);
+                        span.className = "show";
+                        span.innerHTML = element.email
+                        td.appendChild(span);
+                        td.appendChild(input);
+                        tr.appendChild(td);
+                    }
+                    if (chave == "address") {
+                        let td = document.createElement("td");
+                        let span = document.createElement("span");
+                        let input = document.createElement("input");
+                        input.type = "text";
+                        input.name = "address";
+                        input.className = "hidden"
+                        input.value = element.address
+                        td.setAttribute(`data-index-row`, cont);
+                        span.className = "show";
+                        span.innerHTML = element.address
+                        td.appendChild(span);
+                        td.appendChild(input);
+                        tr.appendChild(td);
+                    }
+                    if (chave == "age") {
+                        let td = document.createElement("td");
+                        let span = document.createElement("span");
+                        let input = document.createElement("input");
+                        input.type = "text";
+                        input.name = "age";
+                        input.className = "hidden"
+                        input.value = element.age
+                        td.setAttribute(`data-index-row`, cont);
+                        span.className = "show";
+                        span.innerHTML = element.age
+                        td.appendChild(span);
+                        td.appendChild(input);
+                        tr.appendChild(td);
+                    }
+                    if (chave == "heigth") {
+                        let td = document.createElement("td");
+                        let span = document.createElement("span");
+                        let input = document.createElement("input");
+                        input.type = "text";
+                        input.name = "heigth";
+                        input.className = "hidden"
+                        input.value = element.heigth
+                        td.setAttribute(`data-index-row`, cont);
+                        span.className = "show";
+                        span.innerHTML = element.heigth
+                        td.appendChild(span);
+                        td.appendChild(input);
+                        tr.appendChild(td);
+                    }
+                    if (chave == "vote") {
+                        let td = document.createElement("td");
+                        let span = document.createElement("span");
+                        let input = document.createElement("input");
+                        input.type = "text";
+                        input.name = "vote";
+                        input.className = "hidden"
+                        input.value = element.vote
+                        td.setAttribute(`data-index-row`, cont);
+                        span.className = "show";
+                        span.innerHTML = element.vote
+                        td.appendChild(span);
+                        td.appendChild(input);
+                        tr.appendChild(td);
+                    }
+
+
+                }
+                let td = document.createElement("td");
+                let a = document.createElement("a");
+                let i = document.createElement("i");
+                a.setAttribute(`href`, "#")
+                a.className = "show"
+                a.setAttribute(`onclick`, `update('${cont}','/cadastro/update/')`)
+                td.setAttribute(`data-index-row`, cont);
+                i.className = "fas fa-pen"
+                td.appendChild(a);
+                a.appendChild(i)
+                tr.appendChild(td);
+
+                let td1 = document.createElement("td");
+                let a1 = document.createElement("a");
+                let i1 = document.createElement("i");
+                a1.setAttribute(`href`, "#")
+                a1.className = "show"
+                a1.setAttribute(`onclick`, `remove('${cont}','${element.name}','/cadastro/remove/')`)
+                td1.setAttribute(`data-index-row`, cont);
+                i1.className = "fas fa-trash-alt"
+                td1.appendChild(a1);
+                a1.appendChild(i1)
+                tr.appendChild(td1);
+                tableList.appendChild(tr);
+
+            });
+        }
+    }
     //fazer em casa. Lista de usuários.
 
     //Primeira parte: envia mensagem para o servidor pedindo uma listagem dos usuários
 
     //Segunda parte: apos recebimento da lista de usuarios, no formato JSON, colocar os usuarios na interface
-    let tableList = document.getElementById("list");
 
-    let tr = document.createElement("tr");
-    let td = document.createElement("td");
-    let span = document.createElement("span");
-    let cont;
-    //for(let cont=0;cont<datas.length;cont++){ 
-    td.setAttribute(`data-index-row=${cont}`);
-    span.innerHTML = Object.keys(datas[cont])[0] //keys 0 - name, 1 - email
-    span.className = "show";
-    td.appendChild(span);
-    tr.appendChild(td);
-
-    tableList.appendChild(tr);
     //}
 
 }
+
+list()
 
 
 
