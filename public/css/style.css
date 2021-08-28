@@ -3,13 +3,20 @@
 html{
     font-family: 'Montserrat', sans-serif;
 }
+body{
+    overflow-x: hidden;
+    background-color: black;
+}
+
 .show{
     display:inline-flexbox;
 }
 .hidden{
     display:none;
 }
-
+.bg-warning{
+    background-color: black !important;
+}
 .copyleft {
     display:inline-block;
     transform: rotate(180deg);
@@ -22,4 +29,73 @@ html{
   .validacao{
     color:red !important;
     display: none;
+  }
+  .header-firstapp{
+      position: relative;
+      width: 100%;
+      color: white;
+  }
+  .header-firstapp .navbar-nav{
+      justify-content: center;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .header-firstapp a{
+      display: flex;
+      justify-content: center;
+      width: 400px;
+      margin-top: 50px;
+      font-size: 1.8rem;
+      color: white;
+  }
+
+   .checked{
+    border-bottom: 10px solid #341240;
+  }
+  thead{
+      background-color: #514e52;
+      color:white;
+  }
+  tbody{
+      background-color: black;
+      color: white;
+  }
+  .table-responsive-xl{
+      margin-left: 50px;
+      margin-right: 50px;
+  }
+  tr:hover td{
+      color:#ce47ff;
+      cursor: pointer;
+  }
+  h2,label{
+      color: #ce47ff;
+  }
+  .espacamento{
+      height: 100vh;
+      position:relative;
+      top:0;
+      margin-left: 40px;
+      margin-right: 40px;
+  }
+  .espaca{
+      margin-bottom: 30px !important;
+  }
+  .ajeitasobre{
+      position: relative;
+      color: white;
+      font-size: 2.0rem;
+      margin-top: 100px;
+      justify-content: center;
+      margin-left: 40px;
+      margin-right: 40px;
+      display: flex;
+      width: 100%;
+  }
+  .bg-info{
+      display: flex;
+      font-size: 20px;
+      justify-content: center;
+      background-color:#ce47ff !important;
   }

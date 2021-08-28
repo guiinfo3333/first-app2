@@ -1,4 +1,33 @@
 let cadastro;
+verificaqualMenuSelecionado()
+
+function mudaSelecionado(nome) {
+    console.log(nome)
+    localStorage.setItem("menu", nome)
+}
+
+
+function verificaqualMenuSelecionado() {
+    var op = localStorage.getItem("menu")
+    var listaheader = document.getElementById("listarheader")
+    var cadastroheader = document.getElementById("cadastroheader")
+    var aboutheader = document.getElementById("aboutheader")
+    var listamenus = [listaheader, cadastroheader, aboutheader]
+    listamenus.forEach((element) => {
+        element.classList.remove("checked")
+    })
+    switch (op) {
+        case 'listar':
+            listaheader.classList.add('checked');
+            break
+        case 'cadastro':
+            cadastroheader.classList.add('checked');
+            break;
+        case 'sobre':
+            aboutheader.classList.add('checked');
+            break
+    }
+}
 
 
 function update(index, link) {
@@ -269,7 +298,8 @@ function add() {
         console.log(nome.value)
         const http = new XMLHttpRequest();
         const link = "/cadastro/add"
-        let data = { id: "", name: nome, email: email, address: endereco, age: age, heigth: altura, vote: vote };
+        let data = { name: nome, address: endereco, email: email, age: age, heigth: altura, vote: vote };
+        console.log(data)
         let dataToSend
         http.open("POST", link, true);
         http.setRequestHeader('Content-Type', 'application/json');
@@ -279,6 +309,7 @@ function add() {
         http.send(dataToSend)
         http.onload = () => {
             if (http.readyState === 4 && http.status === 200) {
+                mudaSelecionado('listar')
                 window.location.href = "/cadastro";
             }
         }
@@ -303,6 +334,7 @@ function list() {
     http.onload = (e) => {
         if (http.readyState === 4 && http.status === 200) {
             var valor = JSON.parse(http.response).users
+            console.log(valor)
             let tbod
             let tableList = document.querySelector(`table#list > tbody`);
 
@@ -364,7 +396,7 @@ function list() {
                         let td = document.createElement("td");
                         let span = document.createElement("span");
                         let input = document.createElement("input");
-                        input.type = "text";
+                        input.type = "number";
                         input.name = "age";
                         input.className = "hidden"
                         input.value = element.age
@@ -379,7 +411,7 @@ function list() {
                         let td = document.createElement("td");
                         let span = document.createElement("span");
                         let input = document.createElement("input");
-                        input.type = "text";
+                        input.type = "number";
                         input.name = "heigth";
                         input.className = "hidden"
                         input.value = element.heigth
@@ -408,6 +440,17 @@ function list() {
 
 
                 }
+
+                let td2 = document.createElement("td");
+                let input2 = document.createElement("input");
+                td2.setAttribute(`data-index-row`, cont);
+                td2.className = "hidden"
+                input2.type = "button";
+                input2.value = "Atualizar"
+                input2.classList = "hidden"
+                td2.appendChild(input2);
+                tr.appendChild(td2);
+
                 let td = document.createElement("td");
                 let a = document.createElement("a");
                 let i = document.createElement("i");
@@ -431,7 +474,10 @@ function list() {
                 td1.appendChild(a1);
                 a1.appendChild(i1)
                 tr.appendChild(td1);
+
+
                 tableList.appendChild(tr);
+
 
             });
         }

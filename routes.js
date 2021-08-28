@@ -103,13 +103,13 @@ router.get('/cadastro/list', (req, res) => {
 });
 
 router.post('/cadastro/add', (req, res) => {
-    let user = { name: "", email: "", address: "", heigth: "", age: "", vote: "" };
+    let user = { name: "", address: "", email: "", age: "", heigth: "", vote: "" };
 
     user.name = req.body.name;
-    user.email = req.body.email;
     user.address = req.body.address;
-    user.heigth = req.body.heigth;
+    user.email = req.body.email;
     user.age = req.body.age;
+    user.heigth = req.body.heigth;
     user.vote = req.body.vote;
 
     users.push(user);

@@ -1,12 +1,52 @@
-<%- contentFor( 'body') %>
+<%- contentFor( 'body' ) %>
+    <div class="espacamento">
+        <br>
+        <br>
+        <h2>Cadastrar novo usuário</h2>
+        <br>
+        <form>
+            <div class="form-group">
+                <label for="_name">Nome:</label>
+                <input type="text" name="_name" id="_name" class="form-control espaca">
+                <p class="validacao validacaonome">O nome deve ser preenchido !</p>
+            </div>
 
-<div>
-    <p>Esta aplicação foi criada para auxiliar alunos e interessados que queiram criar sua primeira aplicação Web utilizando a tecnologia Node.js.</p>
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae eum deserunt autem modi ipsam quibusdam? Deserunt tempore eius veritatis quasi quaerat harum eligendi id nisi beatae doloremque alias, iure rerum?</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus ipsum incidunt ipsa facilis dicta nulla labore eveniet magni voluptas mollitia ratione, debitis quibusdam excepturi molestiae accusantium placeat? Inventore, laudantium sunt.
-    Ratione architecto corporis excepturi sunt error dicta numquam cum repellendus maxime necessitatibus, obcaecati nesciunt exercitationem iste quae illum ipsum libero omnis dolores aliquam cupiditate labore eveniet quas dolore! Assumenda, alias?
-    Necessitatibus quis amet adipisci illo dolorem repudiandae. Odit accusamus aliquid magnam eaque. Rerum eveniet, facere provident quibusdam quos vel dolorem error! Atque natus non magnam animi. Asperiores itaque quam incidunt!
-    Quibusdam consequatur qui tempore fuga odit. Consequuntur illo vitae autem voluptates ipsum. Praesentium repudiandae deleniti ipsa fugit laudantium magni fugiat consequatur nulla, enim, eveniet mollitia, quibusdam quae modi necessitatibus eum.
-    Saepe odio suscipit, temporibus nihil pariatur, nemo aspernatur dolorum magni harum fuga totam hic optio odit veniam vitae maiores! Sit eius recusandae suscipit laborum veritatis veniam, corrupti dicta laudantium neque.
-    Sint, earum aspernatur natus magnam dolor velit necessitatibus eum. A eius aut asperiores explicabo velit sapiente minima culpa iure exercitationem, autem ipsam illo nobis modi molestias hic laborum unde aspernatur.</p>
-</div>
+            <div class="form-group">
+                <label for="_address">Endereço:</label>
+                <input type="text" name="_address" id="_address" class="form-control espaca">
+                <p class="validacao validacaoendereco">O endereço deve ser preenchido !</p>
+            </div>
+
+            <div class="form-group">
+                <label for="_email">E-mail:</label>
+                <input type="email" name="_email" id="_email" class="form-control espaca">
+                <p class="validacao validacaoemail">O email deve ser preenchido !</p>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="_heigth">Altura:</label>
+                <input type="number" name="_heigth" id="_heigth" class="form-control espaca money">
+                <p class="validacao validacaoaltura">A altura deve ser preenchida !</p>
+            </div>
+
+            <div class="form-group">
+                <label for="_age">Idade:</label>
+                <input type="number" name="_age" id="_age" class="form-control">
+                <p class="validacao validacaoidade">A idade deve ser preenchida !</p>
+            </div>
+
+            <div class="form-group">
+                <label for="_vote">Votou:</label>
+                <input type="text" name="_vote" id="_vote" class="form-control">
+                <p class="validacao validacaovote">Se votou deve ser preenchido !</p>
+            </div>
+
+            <div class="form-group">
+                <input type="button" onclick="add()" value="Enviar" class="btn btn-success">
+            </div>
+
+        </form>
+
+    </div>
