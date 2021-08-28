@@ -8,3 +8,9 @@ Software criado para discutir os conceitos de criação de uma aplicação Web u
 ### 1- Ter o node instalado em sua máquina
 ### 2- Executar o comando npm install
 ### 3- Executar o comando npm run dev para rodar o script de inicialização configurado no arquivo packpage.json
+
+## Novidades
+
+### 1- Implementação das funções add e list no através do javascript
+### 2- Validação dos campos
+
